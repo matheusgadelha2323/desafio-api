@@ -21,7 +21,8 @@ class UserSyncService
     @task.update!(
       external_user_name: user_data[:name],
       external_company: user_data[:company],
-      external_city: user_data[:city]
+      external_city: user_data[:city],
+      completed: true
     )
 
     Result.success(@task)

@@ -39,19 +39,19 @@ RSpec.describe TaskCardComponent, type: :component do
     end
   end
 
-  context "when task is completed" do
+  context "when task is synced (completed)" do
     let(:task) { create(:task, :completed) }
 
-    it "shows completed badge" do
+    it "shows synced badge" do
       render_inline(described_class.new(task: task))
-      expect(page).to have_text("Concluída")
+      expect(page).to have_text("Sincronizado")
     end
   end
 
-  context "when task is pending" do
-    it "shows pending badge" do
+  context "when task is not synced (pending)" do
+    it "shows not synced badge" do
       render_inline(described_class.new(task: task))
-      expect(page).to have_text("Pendente")
+      expect(page).to have_text("Não sincronizado")
     end
   end
 end
