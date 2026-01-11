@@ -11,6 +11,10 @@ require 'rspec/rails'
 require 'webmock/rspec'
 require 'view_component/test_helpers'
 require 'capybara/rspec'
+
+# Force disable forgery protection for tests
+ActionController::Base.allow_forgery_protection = false
+
 # Add additional requires below this line. Rails is not loaded until this point!
 
 # Requires supporting ruby files with custom matchers and macros, etc, in

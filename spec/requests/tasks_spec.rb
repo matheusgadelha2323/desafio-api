@@ -3,6 +3,10 @@ require 'rails_helper'
 RSpec.describe "Tasks", type: :request do
   let!(:task) { create(:task) }
 
+  before do
+    host! "127.0.0.1"
+  end
+
   let(:api_response) do
     {
       "id" => 1,
