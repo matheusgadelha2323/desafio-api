@@ -1,0 +1,21 @@
+services:
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    ports:
+      - "3000:3000"
+    volumes:
+      - .:/app
+      - bundle_cache:/usr/local/bundle
+      - node_modules:/app/node_modules
+    environment:
+      - RAILS_ENV=development
+      - BINDING=0.0.0.0
+    stdin_open: true
+    tty: true
+    command: bash -c "rm -f tmp/pids/server.pid && bin/dev"
+
+volumes:
+  bundle_cache:
+  node_modules:
