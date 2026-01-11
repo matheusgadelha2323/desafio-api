@@ -8,14 +8,13 @@ services:
     volumes:
       - .:/app
       - bundle_cache:/usr/local/bundle
-      - node_modules:/app/node_modules
+      - /app/node_modules
     environment:
       - RAILS_ENV=development
       - BINDING=0.0.0.0
     stdin_open: true
     tty: true
-    command: bash -c "rm -f tmp/pids/server.pid && bin/dev"
+    command: bash -c "rm -f tmp/pids/server.pid && yarn build && yarn build:css && rails server -b 0.0.0.0"
 
 volumes:
   bundle_cache:
-  node_modules:

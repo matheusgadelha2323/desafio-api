@@ -26,6 +26,8 @@ RUN yarn install
 
 COPY . .
 
+RUN yarn build && yarn build:css
+
 EXPOSE 3000
 
-CMD ["bin/dev"]
+CMD ["rails", "server", "-b", "0.0.0.0"]
