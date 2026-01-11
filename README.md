@@ -1,24 +1,86 @@
-# README
+# Desafio Técnico - Consumo de API Externa
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Aplicação Rails que consome a API externa JSONPlaceholder e atualiza dados de uma Task sem reload da página.
 
-Things you may want to cover:
+## Stack
 
-* Ruby version
+- Ruby 3.3.0
+- Rails 8.0.2
+- Hotwire (Turbo Stream + Stimulus)
+- ViewComponent
+- Tailwind CSS + Flowbite
+- SQLite
+- Faraday (HTTP client)
+- RSpec + WebMock + FactoryBot
 
-* System dependencies
+## Como rodar (Docker)
 
-* Configuration
+```bash
+# Build e iniciar containers
+docker-compose up --build
 
-* Database creation
+# Em outro terminal, rodar migrations e seeds
+docker-compose exec web rails db:migrate db:seed
 
-* Database initialization
+# Acessar a aplicação
+http://localhost:3000
+```
 
-* How to run the test suite
+## Como rodar (Local)
 
-* Services (job queues, cache servers, search engines, etc.)
+```bash
+# Instalar dependências
+bundle install
+yarn install
 
-* Deployment instructions
+# Setup do banco
+rails db:migrate db:seed
 
-* ...
+# Iniciar servidor
+bin/dev
+```
+
+## Como rodar os testes
+
+```bash
+# Via Docker
+docker-compose exec web rspec
+
+# Local
+bundle exec rspec
+```
+
+## Funcionalidade
+
+1. Acesse `http://localhost:3000`
+2. Clique no botão "Sincronizar usuário"
+3. Os dados do usuário são buscados da API `https://jsonplaceholder.typicode.com/users/1`
+4. A interface atualiza sem reload (Turbo Stream)
+
+## Arquitetura
+
+```
+app/
+├── components/           # ViewComponents
+│   ├── task_card_component.rb
+│   └── sync_button_component.rb
+├── controllers/
+│   └── tasks_controller.rb
+├── models/
+│   └── task.rb
+├── services/             # Service Objects
+│   ├── external_user_api_client.rb
+│   └── user_sync_service.rb
+└── javascript/
+    └── controllers/
+        └── sync_controller.js
+```
+
+## Decisões Técnicas
+
+- **SQLite**: Simplicidade para o desafio, zero configuração
+- **Faraday**: HTTP client robusto, fácil de mockar nos testes
+- **Service Objects**: Separação de responsabilidades, testabilidade
+- **ViewComponent**: Componentização real em vez de partials
+- **Turbo Stream**: Atualização declarativa da UI, idiomático Rails 8
+- **Result Pattern**: Tratamento de erros explícito nos services
