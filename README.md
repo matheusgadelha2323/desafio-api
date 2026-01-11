@@ -13,17 +13,33 @@ Aplicação Rails que consome a API externa JSONPlaceholder e atualiza dados de 
 - Faraday (HTTP client)
 - RSpec + WebMock + FactoryBot
 
-## Como rodar (Docker)
+## Como rodar (Docker) [Recomendado]
 
 ```bash
-# Build e iniciar containers
-docker-compose up --build
+# Build e iniciar containers (modo detached)
+docker-compose up --build -d
 
-# Em outro terminal, rodar migrations e seeds
+# Rodar migrations e seeds
 docker-compose exec web rails db:migrate db:seed
 
 # Acessar a aplicação
 http://localhost:3000
+```
+
+### Reset completo (do zero)
+
+```bash
+# Parar containers e remover volumes
+docker-compose down -v
+
+# Remover banco local (Rails 8 usa storage/ para SQLite)
+rm -f storage/*.sqlite3*
+
+# Rebuild e iniciar
+docker-compose up --build -d
+
+# Setup do banco
+docker-compose exec web rails db:migrate db:seed
 ```
 
 ## Como rodar (Local)
