@@ -1,0 +1,11 @@
+<%= turbo_stream.replace "task_card" do %>
+  <%= render TaskCardComponent.new(task: @task) %>
+<% end %>
+
+<%= turbo_stream.replace "flash" do %>
+  <div id="flash" class="mb-4">
+    <div class="p-4 text-sm text-green-800 rounded-lg bg-green-50" role="alert">
+      <span class="font-medium">Sucesso!</span> Dados do usuário sincronizados.
+    </div>
+  </div>
+<% end %>

@@ -1,0 +1,15 @@
+<div class="min-h-screen bg-gray-100 py-12 px-4 sm:px-6 lg:px-8">
+  <div class="max-w-md mx-auto">
+    <h1 class="text-2xl font-bold text-gray-900 text-center mb-8">
+      Desafio Consumo API
+    </h1>
+
+    <div id="flash"></div>
+
+    <%= render TaskCardComponent.new(task: @task) %>
+
+    <p class="mt-6 text-center text-sm text-gray-500">
+      Clique no botão para sincronizar dados do usuário externo
+    </p>
+  </div>
+</div>

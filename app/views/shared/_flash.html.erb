@@ -1,0 +1,11 @@
+<div id="flash" class="mb-4">
+  <% if local_assigns[:type] == :error %>
+    <div class="p-4 text-sm text-red-800 rounded-lg bg-red-50" role="alert">
+      <span class="font-medium">Erro!</span> <%= message %>
+    </div>
+  <% else %>
+    <div class="p-4 text-sm text-green-800 rounded-lg bg-green-50" role="alert">
+      <span class="font-medium">Sucesso!</span> <%= message %>
+    </div>
+  <% end %>
+</div>
