@@ -16266,8 +16266,27 @@ var hello_controller_default = class extends Controller {
   }
 };
 
+// app/javascript/controllers/sync_controller.js
+var sync_controller_default = class extends Controller {
+  static targets = ["text"];
+  submit(event) {
+    this.element.disabled = true;
+    this.element.classList.add("opacity-75", "cursor-not-allowed");
+    setTimeout(() => {
+      this.clearFlashMessage();
+    }, 5e3);
+  }
+  clearFlashMessage() {
+    const flash = document.getElementById("flash");
+    if (flash) {
+      flash.innerHTML = "";
+    }
+  }
+};
+
 // app/javascript/controllers/index.js
 application.register("hello", hello_controller_default);
+application.register("sync", sync_controller_default);
 
 // app/javascript/application.js
 var import_flowbite_turbo = __toESM(require_flowbite_turbo());
