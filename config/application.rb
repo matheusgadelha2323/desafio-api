@@ -38,5 +38,9 @@ module DesafioConsumoApi
 
     # Don't generate system test files.
     config.generators.system_tests = nil
+
+    # ViewComponent configuration
+    config.view_component.generate.sidecar = false
+    config.view_component.generate.preview = false
   end
 end
